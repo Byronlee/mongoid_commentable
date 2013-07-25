@@ -17,7 +17,7 @@ module Mongoid::Commentable
   end
     
   def create_comment!(params)
-    comment = comments.create!(params)
+    comment = comments.create!(params.permit!)
     comment.path = comment.parent ? comments.find(comment.parent).path + '.' + comment.id.to_s : "root."+comment.id.to_s
     comment
   end
